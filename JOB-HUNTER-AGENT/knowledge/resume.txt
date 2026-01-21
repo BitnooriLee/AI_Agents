@@ -1,0 +1,132 @@
+# Bitnoori Lee
+
+**Backend / Automation Engineer**
+
+📧 bitnoori.lee@gmail.com| 📱 +46 76 8511 637
+🌐 LinkedIn: linkedin.com/in/bitnoori-lee | GitHub: github.com/bitnoorilee
+📍 Gothenburg, Sweden
+
+---
+
+## Professional Summary
+
+Backend and Automation Engineer with experience in cloud infrastructure, large-scale backend systems, and automated measurement platforms. Strong background in Python development, CI/CD pipelines, cloud-native environments, and high-performance computing. Proven ability to improve system reliability, automation throughput, and software maintainability across R&D, production, and enterprise environments.
+
+---
+
+## Technical Skills
+
+**Programming Languages:** Python, Java, JavaScript, C++, Swift
+**Backend & Automation:** RESTful APIs, Test Automation, Instrument Control (PyVISA, TSP), CI/CD
+**Databases:** PostgreSQL
+**Cloud & DevOps:** AWS, Kubernetes, Docker, Terraform, Jenkins
+**Monitoring & Ops:** Splunk, Datadog, ServiceNow, Jira
+**Tools:** GitHub, Bitbucket, Figma, Adobe XD, Sketch, LaTeX
+
+---
+
+## Professional Experience
+
+### Test Automation Engineer
+
+**Hot Disk AB** | Gothenburg, Västra Götaland County, Sweden | *Mar 2025 - Present*
+
+* Lead software engineer for Flex Line automation project, owning the design and implementation of automated measurement and test systems using Python, PyVISA, and Keithley TSP
+* Architected and deployed high-throughput, repeatable measurement workflows by controlling lab instruments over TCP/IP (LAN)
+* Enabled reliable R&D experimentation and production-line integration through scalable automation frameworks
+* Collaborated closely with hardware engineers and researchers to translate experimental requirements into production-ready systems
+
+### Backend Engineer
+
+**JPMorgan Chase & Co.** | Ireland | *Oct 2023 - March 2025*
+
+* Improved secret detection accuracy by 10% through enhancements to detection logic and integration with Bitbucket APIs in Python-based plugins
+* Reduced code size by 70% through large-scale refactoring, improving internal structure, readability, and long-term maintainability
+* Created and maintained monitoring systems using Splunk and Datadog to ensure high availability and performance
+* Implemented Jenkins CI/CD pipelines and managed AWS infrastructure for deployment automation
+* Provided L2/L3 IT support for systems serving over 50,000 users
+
+### AI Research Intern
+
+**AI Sweden / Dakota State University** | Sweden / USA | *May 2023 - Aug 2023*
+
+* Achieved over 10% evaluation score improvement by developing a benchmarking framework for GPT-SW3 (LLM) using federated learning and fine-tuning
+* Conducted in-depth simulations of data poisoning and model poisoning attacks on federated learning systems
+* Identified vulnerabilities and supported preparation of defense strategies against evolving AI security threats
+* Selected as best presentation in the program and participated in the DEFCON AI Red Team Challenge 2023
+
+### Application Engineer
+
+**Hot Disk AB** | Sweden | *Jan 2021 - May 2023*
+
+* Contributed to a 5% increase in net profit by designing experiments and producing thermal conductivity analysis reports
+* Supported distributors and customers in Korea, Japan, and Taiwan, contributing to a 30% increase in yearly sales
+* Applied machine learning techniques in next-generation measurement instruments, achieving 99% prediction accuracy
+
+### Project Manager
+
+**Korea Securities Depository** | South Korea | *Aug 2019 - Nov 2020*
+
+* Managed cross-functional projects involving financial systems and operational processes
+* Coordinated stakeholders to ensure timely delivery and regulatory compliance
+
+### Cargo Marketing Manager / Researcher
+
+**Incheon International Airport Corporation** | South Korea | *Jan 2014 - Jan 2018*
+
+* Conducted market research and data analysis to support cargo operations and airline partnerships
+* Supported strategic planning initiatives for international logistics
+
+---
+
+## Education
+
+### MSc in Computer Science (High Performance Computing)
+
+**Chalmers University of Technology** | Sweden | *2021 - 2023*
+
+### Bachelor's Degree in Electronics & Electrical Engineering (Cum Laude)
+
+**Pohang University of Science and Technology (POSTECH)** | South Korea | *2007 - 2012*
+
+---
+
+## Projects
+
+### AI Infrastructure Project – FINEX
+
+*LLM, Federated Learning*
+
+* Designed GPT-SW3 within a federated setup, achieving 10%+ improvement in evaluation scores
+* Conducted extensive simulations of data and model poisoning attacks to identify infrastructure vulnerabilities
+
+### Machine Learning Research Project
+
+*Machine Learning*
+
+* Investigated feasibility of predicting thermal conductivity from transient curves using machine learning
+* Reduced required measurements by up to 80%, saving energy and operational costs
+
+### Particle System
+
+*C++, Computer Graphics*
+
+* Developed a high-performance particle simulation system utilizing both CPU and GPU rendering
+
+---
+
+## Languages
+
+**English:** Professional
+**Korean:** Native
+**Swedish:** Conversational
+
+---
+
+## Certifications
+
+* Programming with JavaScript – Meta
+* Version Control – Meta
+* Intro to Front-End Development – Meta
+* UX Immersion & UX Fundamentals – CareerFoundry
+* SQL Developer

@@ -1,6 +1,4 @@
-from crewai.project.wrappers import TaskResultT
 import dotenv
-import sys
 
 dotenv.load_dotenv()
 
