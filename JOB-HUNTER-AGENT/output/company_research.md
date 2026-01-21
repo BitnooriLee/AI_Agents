@@ -1,84 +1,80 @@
-# Company Overview
-**Company Name:** ASML Holding N.V.  
-**Headquarters:** Veldhoven, Netherlands  
-**Founded:** 1984 (joint venture of Philips and ASM International)  
-**Employees:** ~44,000+ worldwide (60+ locations in 16 countries)  
-**Industry:** Semiconductor Equipment—world-leading supplier of lithography systems (DUV and EUV) for chip manufacturing  
-**Global Footprint Highlights:**
-- Veldhoven, NL: Global HQ, R&D, manufacturing, Board of Management  
-- Silicon Valley, US: Computational applications, e-beam metrology R&D  
-- San Diego, US: DUV/EUV light-source development (Cymer)  
-- Hsinchu & Linkou, Taiwan: Major R&D, manufacturing, support centers  
-- Berlin, DE: Optics and wafer-chuck manufacturing  
-- Multiple customer support & training centers across Asia, Europe, and the Americas  
+```markdown
+# Company Overview  
+**Name:** Booking.com    
+**Founded:** 1996 (Amsterdam, Netherlands)  
+**Headquarters:** Amsterdam, Netherlands (198 offices in 70+ countries)  
+**Parent Company:** Booking Holdings Inc. (NASDAQ: BKNG)  
+**Employees:** 10,000–20,000 worldwide (140 nationalities)  
+**Industry:** Online Travel & Hospitality Marketplace  
+**Core Business:** Digital travel platform connecting travelers to 28 M+ accommodations, transport & experiences  
 
-# Mission and Values
-**Mission:**  
-“We believe technology can be a force for good. Together with our partners, we provide leading patterning solutions that drive the advancement of microchips to solve society’s toughest challenges.”  
+# Mission and Values  
+**Mission:** “Make it easier for everyone to experience the world.”  
+**Vision:** Build technology that removes friction from travel and drives positive impact for travelers, partners, communities.  
+**Core Values (Our Impact page):**  
+- **Think customer first** – Obsess over traveler/partner needs in every interaction.  
+- **Succeed together** – Collaborate as One Team; value diverse perspectives.  
+- **Own it** – Act as protagonists: make clear commitments & take responsibility.  
+- **Learn forever** – Embrace continuous learning and broad perspectives.  
+- **Do the right thing** – Deliver results ethically for colleagues, communities & the planet.  
+- **Make the world a better place** – Measure success by positive impact for all stakeholders.  
 
-**Vision:**  
-“Unlocking the potential of people and society by pushing technology to new limits.”  
+# Recent News or Changes  
+- **June 2024:** _AI Travel Assistant Beta_ launched – Conversational, LLM-powered tool for trip planning, real‐time support, personalized itinerary & accommodation recommendations. Full launch slated for early 2025.  
+- **March 2024:** _Booking.com × OpenAI Partnership_ announced – Generative content for property descriptions, destination guides & on-the-fly localization in 40+ languages; global roll-out planned by Q1 2025.  
+- **2023 Sustainability Report:** 20% YOY carbon reduction per booking; “Green Stays” filter; carbon-neutral by 2030 target.  
 
-**Core Values:**  
-- **Challenge:** Question assumptions, push physics and engineering boundaries (e.g., development of High-NA EUV systems).  
-- **Collaborate:** Deep partnerships with TSMC, Samsung, Intel, suppliers, academia to co-innovate complex lithography solutions.  
-- **Care:** Focus on people, customers, society, and sustainability (net-zero by 2040, 100% renewable operations by 2025, zero operational waste by 2030).  
+# Role Context and Product Involvement  
+As an **AI Engineer** on the Personalization & Recommendation team you will:  
+- Build & deploy ML models that power “Recommended for you” feeds, search‐result rankings & tailored offers.  
+- Collaborate with Data Engineering (Kafka/Spark), Backend Services (Docker, Kubernetes on AWS), Product Management & UX to integrate models into Booking.com’s global platform.  
+- Maintain CI/CD pipelines for model training, evaluation & production deployment; monitor model performance (latency, accuracy, business metrics such as CTR & conversion uplift).  
+- Optimize distributed training (TensorFlow/PyTorch) for large-scale data (10⁹+ events/day), ensure reproducibility & robust A/B testing infrastructure.  
 
-# Recent News or Changes
-- **Leadership Transition (April 2024):** Christophe Fouquet appointed President & CEO (four-year term), with renewed Board focus on customer value.  
-- **Q2 2024 Financial Results (July 2024):**  
-  - Net sales: €5.6 billion (↑14% YoY)  
-  - Order intake: €6.2 billion (strong EUV demand)  
-  - Ending backlog: ~€40 billion, reflecting multi-year visibility  
-- **High-NA EUV Milestone:** First customer deliveries slated for late 2024/early 2025, enabling sub-2 nm nodes.  
-- **Strategic Partnerships:** Expanded AI-driven yield-optimization software initiatives with leading fabs; Mistral AI collaboration announced for advanced inspection algorithms.  
+# Likely Interview Topics  
+**1. Machine Learning & Algorithms**  
+- Recommendation algorithms: collaborative filtering, embeddings, hybrid models  
+- Personalization techniques: context-aware ranking, multi-armed bandits  
+- Model evaluation: offline metrics (RMSE, precision@k), online metrics (CTR, lift)  
 
-# Role Context and Product Involvement
-**Team:** Computational Imaging & AI (within R&D software organization)  
-**Product Context:**  
-- Develop and deploy ML/DL models for real-time image reconstruction and process control in EUV/DUV lithography scanners  
-- Integrate neural networks on embedded GPU-accelerated platforms inside inspection and metrology tools  
-- Collaborate with optical, mechatronics, firmware, and system-integration teams to push throughput and overlay performance  
+**2. Software & System Design**  
+- Designing scalable data pipelines (e.g., Kafka, Spark/Flink)  
+- Microservices for model serving (Docker, Kubernetes, AWS ECS/EKS)  
+- CI/CD for ML (Terraform, Jenkins/GitHub Actions, MLflow)  
 
-**Responsibilities Mapping:**  
-- Research novel deep-learning algorithms to enhance wafer-level imaging resolution  
-- Optimize and quantize models (TensorFlow/PyTorch → C++/CUDA) for embedded systems in production tools  
-- Contribute to CI/CD pipelines, testing frameworks, and code-review best practices in a critical high-reliability environment  
+**3. Model Deployment & Monitoring**  
+- Containerization and orchestration (Dockerfile optimizations, Helm charts)  
+- Monitoring & alerting (Prometheus, Grafana, DataDog)  
+- Rollback strategies, canary deployments, drift detection  
 
-# Likely Interview Topics
-1. **Deep Learning & Computer Vision:**  
-   - Convolutional neural networks for low-light or noisy image reconstruction  
-   - Model quantization, pruning, and acceleration on GPUs/embedded targets  
-2. **Systems Integration & Performance:**  
-   - Profiling and optimizing inference pipelines for real-time constraints  
-   - Memory- and compute-efficient implementations in C++ and CUDA  
-3. **Semiconductor Process Knowledge:**  
-   - Fundamentals of lithography, overlay, and metrology challenges  
-   - Role of AI in scanner control loops (focus, alignment, defect detection)  
-4. **Software Engineering Practices:**  
-   - Designing robust CI/CD and automated testing for mission-critical systems  
-   - Cross-team collaboration experience (optics, firmware, hardware)  
-5. **Problem-Solving & Communication:**  
-   - Articulating trade-offs in algorithm design and system integration  
-   - Explaining technical solutions to diverse stakeholders  
+**4. Coding & Technical Deep Dives**  
+- Python proficiency: idiomatic code, libraries (NumPy, pandas)  
+- TensorFlow/PyTorch: custom layers, training loops, performance tuning  
+- AWS services: S3, Lambda, SageMaker or custom EC2/EKS pipelines  
 
-# Suggested Questions to Ask
-- **Team & Roadmap:**  
-  - “What are the highest-priority AI/ML use cases the Computational Imaging & AI team is tackling over the next 12 months?”  
-  - “How is the team structured between research, prototype development, and production deployment?”  
-- **Technical Challenges:**  
-  - “What are the biggest performance or accuracy bottlenecks you’ve encountered when deploying DL models on the scanner’s embedded systems?”  
-  - “How do you validate and benchmark new algorithms under real-world manufacturing conditions?”  
-- **Collaboration & Culture:**  
-  - “Can you describe the collaboration model between the software AI team and hardware, optics, and firmware engineering groups?”  
-  - “How does ASML foster continuous skill development and knowledge sharing within R&D teams?”  
-- **Product & Impact:**  
-  - “How rapidly do customers adopt new AI-driven features, and what feedback loops exist to iterate on those models?”  
-  - “What metrics define success for AI initiatives in production lithography systems?”  
-- **Career Growth & Sustainability:**  
-  - “What advancement paths are common for mid-level AI engineers within ASML?”  
-  - “How does the company balance ambitious R&D goals with its commitments to sustainability and operational excellence?”  
+**5. Behavioral & Culture Fit**  
+- Ownership stories: end-to-end projects, cross-team collaboration  
+- Customer-centric mindset: improving user experience via personalization  
+- Examples of learning from failure & doing the right thing  
 
----
+# Suggested Questions to Ask  
+1. **Team & Roadmap**  
+   - “Can you describe the structure of the Personalization & Recommendation organization? How do AI Engineers, Data Engineers and Product Managers collaborate?”  
+   - “What are the team’s top priorities in the next 6–12 months?”  
 
-*Prepared to help you demonstrate alignment with ASML’s mission, anticipate technical themes, and engage with insightful questions that underscore your expertise and curiosity.*
+2. **Data & Infrastructure**  
+   - “What does your current ML infrastructure look like (compute, data stores, orchestration)? Any major planned upgrades?”  
+   - “How is data quality and labeling handled for training and online inference?”  
+
+3. **Model Performance & Metrics**  
+   - “Which key business metrics (e.g., CTR, conversion uplift) do you track for personalization experiments?”  
+   - “How do you balance exploration vs. exploitation in your recommendation algorithms?”  
+
+4. **Culture & Growth**  
+   - “How does Booking.com support continuous learning, e.g., conferences, internal knowledge-shares or dedicated learning time?”  
+   - “What are typical career paths for AI Engineers within the organization?”  
+
+5. **Commitment & Values**  
+   - “How does the team embed Booking.com’s values (Think customer first, Learn forever, Own it) in day-to-day work?”  
+   - “Could you share an example of how the team ‘did the right thing’ when faced with a tough technical or ethical decision?”  
+```

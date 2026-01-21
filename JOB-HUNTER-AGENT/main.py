@@ -114,11 +114,15 @@ class JobHunterCrew:
         )
 
 #for basic testing
-JobHunterCrew().crew().kickoff(
+result =JobHunterCrew().crew().kickoff(
     inputs={
         "level": "Mid",
         "position": "AI Engineer",
         "location": "Netherlands",
     }
 )
+
+#to save in the database
+for task_output in result.tasks_output:
+    print(task_output.pydantic)
 
