@@ -45,7 +45,8 @@ def update_status(status_container, event):
     status_messages = {
         'response.web_search_call.completed' : (" Web Search completed", "complete"),
         'response.web_search_call.in_progress': (" Web Search in progress...", "running"),
-        'response.web_search_call.searching': (" Starting web search...", "running")
+        'response.web_search_call.searching': (" Starting web search...", "running"),
+        'response.completes': ("", "complete"),
     }
 
     if event in status_messages:
