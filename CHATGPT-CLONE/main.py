@@ -4,7 +4,7 @@ dotenv.load_dotenv()
 
 from openai import OpenAI
 import streamlit as st
-from agents import Agent, Runner, SQLiteSession, WebSearchTool, FileSearchTool
+from agents import Agent, Runner, SQLiteSession, WebSearchTool, FileSearchTool, ImageGenerationTool
 import base64
 
 client = OpenAI()
@@ -26,6 +26,15 @@ if "agent" not in st.session_state:
             FileSearchTool(
                 vector_store_ids=[VECTOR_STORE_ID],
                 max_num_results=3,
+            ),
+            ImageGenerationTool(
+                tool_config={
+                    "type": "image_generation",
+                    "quality": "low:",
+                    "output_format": "jpeg",
+                    "moderate":"low",
+                    "partial_images": 1,
+                }
             ),
             ],
     )
@@ -56,12 +65,17 @@ async def paint_history():
                     if message["type"] == "message":
                         st.write(message["content"][0]["text"].replace("$","\$"))
         if "type" in message:
-            if message["type"] == "web_search_call": 
+            message_type = message["type"]
+            if message_type == "web_search_call": 
                 with st.chat_message("ai"):
                     st.write("Searched the web...") 
-            elif message["type"] == "file_search_call":
+            elif message_type == "file_search_call":
                 with st.chat_message("ai"):
                     st.write("Searched the files...") 
+            elif message_type == "image_generation_call":
+                image = base64.b64decode(message["result"])
+                with st.chat_message("ai"):
+                    st.image(image) 
 
 def update_status(status_container, event):
     status_messages = {
@@ -71,6 +85,8 @@ def update_status(status_container, event):
         'response.file_search_call.completed' : (" File Search completed", "complete"),
         'response.file_search_call.in_progress': (" File Search in progress...", "running"),
         'response.file_search_call.searching': (" Starting file search...", "running"),
+        'response.image_generation_call.in_progress': (" Image Generation in progress...", "running"),
+        'response.image_generation_call.generating': (" Starting image generation...", "running"),
         'response.completes': ("", "complete"),
     }
 
@@ -83,6 +99,7 @@ asyncio.run(paint_history())
 async def run_agent(message):
     with st.chat_message("ai"):
         text_placeholder = st.empty()
+        image_placeholder = st.empty()
         response = ""
         status_container = st.status("", expanded=False)
         stream = Runner.run_streamed(
@@ -99,7 +116,9 @@ async def run_agent(message):
                 if event.data.type == "response.output_text.delta":
                     response += event.data.delta
                     text_placeholder.write(response.replace("$","\$"))
-
+                elif event.data.type == "response.image_generation_call.partial_image":
+                    image = base64.b64decode(event.data.partial_image_b64)
+                    image_placeholder.image(image)
 
 prompt =st.chat_input(
     "Write a message for your assistant",
