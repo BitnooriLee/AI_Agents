@@ -4,8 +4,9 @@ dotenv.load_dotenv()
 from openai import OpenAI
 import asyncio
 import streamlit as st
-from agents import Runner, SQLiteSession, function_tool, RunContextWrapper
+from agents import Runner, SQLiteSession, function_tool, RunContextWrapper, InputGuardrailTripwireTriggered
 from models import UserAccountContext
+from my_agents.triage_agent import triage_agent
 
 @function_tool
 def get_user_tier(wrapper: RunContextWrapper[UserAccountContext]):
@@ -18,6 +19,7 @@ user_account_context = UserAccountContext(
     customer_id=123456,
     name="John Doe",
     tier="basic",
+    email="john.doe@example.com",
 )
 
 if "session" not in st.session_state:
@@ -50,20 +52,22 @@ async def run_agent(message):
         response = ""
 
         st.session_state["text_placeholder"] = text_placeholder
+        try:
+            stream = Runner.run_streamed(
+                triage_agent,
+                message,
+                session=session,
+                context=user_account_context,
+            )
 
-        stream = Runner.run_streamed(
-            agent,
-            message,
-            session=session,
-            context=user_account_context,
-        )
+            async for event in stream.stream_events():
+                if event.type == "raw_response_event":
 
-        async for event in stream.stream_events():
-            if event.type == "raw_response_event":
-
-                if event.data.type == "response.output_text.delta":
-                    response += event.data.delta
-                    text_placeholder.write(response.replace("$", "\$"))
+                    if event.data.type == "response.output_text.delta":
+                        response += event.data.delta
+                        text_placeholder.write(response.replace("$", "\$"))
+        except InputGuardrailTripwireTriggered:
+            st.write("I cannot help with that. Please try again.")
 
 
 message = st.chat_input(
