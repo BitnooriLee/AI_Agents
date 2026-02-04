@@ -8,6 +8,7 @@ from agents import (
     )
 import streamlit as st
 from agents.extensions.handoff_prompt import RECOMMENDED_PROMPT_PREFIX
+from agents.extensions import handoff_filters
 from models import UserAccountContext, InputGuardRailOutput, HandoffData
 from my_agents.account_agent import account_agent
 from my_agents.billing_agent import billing_agent
@@ -112,6 +113,7 @@ def make_handoff(agent):
         agent=agent,
         on_handoff=handle_handoff,
         input_type=HandoffData,
+        input_filter= handoff_filters.remove_all_tools
     )
 
 triage_agent = Agent(
