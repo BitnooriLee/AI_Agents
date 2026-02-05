@@ -17,4 +17,5 @@ async def run(self, transcription):
     async for chunk in VoiceWorkflowHelper.stream_text_from(result):
         yield chunk
     
-    st.session_state["agent"] = result.last_agent 
+    st.session_state["agent"] = result.last_agent
+    
