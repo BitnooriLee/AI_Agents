@@ -21,6 +21,7 @@ news_analyst = Agent(
     
     Use external APIs to search and scrape web content for current information.
     """,
+    output_key="NewsAnalyst_result", 
     tools=[
         web_search_tool,
     ],
