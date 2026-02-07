@@ -8,6 +8,8 @@ MODEL = LiteLlm(model="openai/gpt-4o")
 
 
 class OptimizedPrompt(BaseModel):
+    model_config = {"json_schema_extra": {"additionalProperties": False}}
+
     scene_id: int = Field(description="Scene ID from the original content plan")
     enhanced_prompt: str = Field(
         description="Detailed prompt with technical specs and text overlay instructions for vertical YouTube Shorts"
@@ -15,6 +17,8 @@ class OptimizedPrompt(BaseModel):
 
 
 class PromptBuilderOutput(BaseModel):
+    model_config = {"json_schema_extra": {"additionalProperties": False}}
+
     optimized_prompts: List[OptimizedPrompt] = Field(
         description="Array of optimized image generation prompts for vertical YouTube Shorts"
     )
