@@ -36,6 +36,7 @@ async def generate_images(tool_context: ToolContext):
             prompt=enhanced_prompt,
             n=1,
             moderation="low",
+            quality="low",
             output_format="jpeg",
             background="opaque",
             size="1024x1536",
