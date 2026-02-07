@@ -35,6 +35,6 @@ content_planner_agent = Agent(
     description=CONTENT_PLANNER_DESCRIPTION,
     instruction=CONTENT_PLANNER_PROMPT,
     model=MODEL,
-    output_schema=ContentPlanOutput,
+    #output_schema=ContentPlanOutput,
     output_key="content_planner_output",
 )
