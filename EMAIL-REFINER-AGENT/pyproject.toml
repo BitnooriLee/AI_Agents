@@ -9,6 +9,7 @@ dependencies = [
     "google-genai>=1.31.0",
     "litellm>=1.76.0",
     "requests>=2.32.5",
+    "sseclient-py>=1.9.0",
 ]
 
 [dependency-groups]
