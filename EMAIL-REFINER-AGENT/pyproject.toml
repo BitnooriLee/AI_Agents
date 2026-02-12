@@ -11,7 +11,6 @@ dependencies = [
     "litellm>=1.81.3",
     "requests>=2.32.5",
     "sseclient-py>=1.9.0",
-    "greenlet>=3.3.1",
 ]
 
 [dependency-groups]
