@@ -1,60 +1,145 @@
-Diary Entry – Asset Allocation & Expenses
-========================================
+**2026 Personal Health & Fitness Goals**
 
-June 12, 2024
-
-Woke up thinking about my portfolio again. Markets have been choppy, but I'm mostly sticking to my plan. Here's where things stand today:
-
-Stocks
-------
-- Apple (AAPL): 350 shares @ $128.40 avg. Up about 18%. Tempted to trim if it goes above $200, but for now, holding tight.
-- Microsoft (MSFT): 275 shares @ $242.10 avg. Still my core tech holding. No plans to touch it unless something big changes.
-
-International
--------------
-- Toyota (TM): 40 shares @ $134.75. Just a small position for some global flavor.
-- Nestlé (NSRGY): 120 shares @ $113.20. Steady dividends, reinvesting as usual.
-
-Growth/Small Cap
-----------------
-- Roku (ROKU): 500 shares @ $59.80. Still underwater here. Need to check Q3 earnings before making any moves.
-- Block (SQ): 300 shares @ $62.50. Down, but showing some signs of life. Watching for a breakout above $80.
-
-Passive/Core
-------------
-- VTI: 600 units @ $212.90. The backbone of my portfolio.
-- EEM: 450 units @ $38.40. Emerging markets are lagging, but I'm patient.
-
-Bonds & Cash
-------------
-- $45k in 2-year Treasuries (4.84% coupon).
-- $18k in IG corporates, laddered 2026-2029. Avg YTM ~4.6%.
-- $23,700 in a 5.05% money market fund. About 7% of my portfolio, ready for opportunities.
-
-Alternatives
-------------
-- Prologis (PLD): 280 shares @ $116.00. REIT for some real asset exposure.
-- Gold: 5 oz, cost basis $1,745/oz. Feels good to have a little insurance.
-- Bitcoin: 2.3 BTC, blended cost $29,300. Capping this at 3% of net worth for now.
-
-Portfolio value: ~$840k. Target: 60% equities, 25% bonds, 10% alts, 5% cash. 3-year annualized return: 9.2%. Beta vs S&P 500: 0.93.
-
-Action items: Rebalance if equities >65% or cash <5%. Watch small caps after earnings. Decide on AAPL/MSFT trim by next quarter.
+**Vision:**
+Build a leaner, stronger, and healthier body through consistent training, disciplined nutrition, and long-term sustainable habits.
 
 ---
 
-Expense Tracking
-================
+# 1. Body Composition Goal
 
-- Coffee at Blue Bottle: $5.25 (treat for myself after a long week)
-- Groceries (Trader Joe's): $74.80 (stocked up on veggies and snacks)
-- Monthly rent paid: $2,150 (wish this was lower, but location is worth it)
-- Gym membership: $49 (need to go more often!)
-- Dinner with friends: $38.60 (Korean BBQ, totally worth it)
-- Uber to work: $17.40 (rainy morning, didn't want to bike)
-- Streaming subscriptions: $27.99 (Netflix + Spotify)
-- Book purchase: $14.99 (finally got that investing book I wanted)
-- Phone bill: $62.00 (should look for a cheaper plan)
-- Miscellaneous: $23.50 (random Amazon stuff)
+Primary objective for 2026 is to improve overall body composition.
 
-Reflection: Spent a bit more than usual this week, but most of it felt justified. Need to keep an eye on those little Amazon purchases—they add up! Overall, feeling good about my financial discipline, but always room to improve.
+Goals:
+
+* Reduce **7 kg of body fat**
+* Maintain or increase **lean muscle mass**
+* Achieve a stronger and more athletic physique
+
+Strategy:
+
+* Maintain consistent resistance training
+* Prioritize adequate protein intake
+* Track body weight and physical condition regularly
+
+Progress Tracking:
+
+* Weekly body weight monitoring
+* Visual and strength progress tracking
+* Monthly reflection on adherence and progress
+
+---
+
+# 2. Strength Training & Muscle Growth
+
+Focus on **hypertrophy (muscle growth)** and progressive strength development.
+
+Training Structure:
+
+* **Weight training at least 6 times per week**
+* Target: balanced full-body development
+* Emphasis on progressive overload
+
+Key Focus Areas:
+
+* Back and pull strength
+* Upper body hypertrophy
+* Overall muscular development
+
+Strength Milestone Goal:
+
+* Perform **3 strict pull-ups**
+
+Training Philosophy:
+
+* Consistency over perfection
+* Small improvements accumulated over time
+* Avoid injury by managing recovery and fatigue
+
+Current Status (March 4, 2026):
+
+* Average training frequency: **~7 sessions per week**
+* Overall adherence to training plan: **~80%**
+
+---
+
+# 3. Nutrition & Recovery
+
+Daily Nutrition Target:
+
+* **Protein intake: 110–120 g per day**
+* Emphasis on whole and nutrient-dense foods
+* Maintain balanced calorie intake to support fat loss while preserving muscle
+
+Habits to Maintain:
+
+* Regular meal structure
+* Avoid excessive processed foods
+* Maintain adequate hydration
+
+Recovery Focus:
+
+* Prioritize sleep quality
+* Manage training fatigue
+* Support recovery through nutrition and supplementation
+
+---
+
+# 4. Supplement Strategy
+
+Creatine Supplementation:
+
+* Started **Creatine Monohydrate in the last week of February 2026**
+* Purpose:
+
+  * Improve strength performance
+  * Support muscle growth
+  * Enhance training capacity
+
+Strategy:
+
+* Daily consistent intake
+* Combine with resistance training and adequate hydration
+
+Expected Benefits:
+
+* Slight increase in training performance
+* Improved muscle recovery
+* Potential increase in lean muscle mass
+
+---
+
+# 5. Lifestyle Discipline
+
+Build sustainable habits that support long-term health.
+
+Key Principles:
+
+* Discipline over motivation
+* Consistency over intensity
+* Focus on long-term progress rather than short-term results
+
+Maintain:
+
+* Regular training schedule
+* Balanced nutrition
+* Structured lifestyle habits
+
+---
+
+# 6. Current Progress Reflection (March 4, 2026)
+
+Overall adherence to goals: **~80%**
+
+Positive Indicators:
+
+* Training frequency exceeding goal (**~7 sessions per week**)
+* Consistent effort in nutrition and lifestyle discipline
+* Beginning supplementation strategy to support muscle growth
+
+Main Focus Moving Forward:
+
+* Maintain consistency
+* Continue progressive overload in training
+* Improve nutritional consistency to support fat loss and muscle growth
+
+The goal is not perfection, but **sustained consistency throughout the year**.

@@ -2,29 +2,46 @@ import dotenv
 
 dotenv.load_dotenv()
 from openai import OpenAI
+import base64
 import asyncio
+import copy
 import streamlit as st
-<<<<<<< HEAD
-from agents import Runner, SQLiteSession, InputGuardrailTripwireTriggered, OutputGuardrailTripwireTriggered
-from models import UserAccountContext
-from my_agents.triage_agent import triage_agent
-=======
-from agents import Agent, Runner, SQLiteSession, WebSearchTool, FileSearchTool
->>>>>>> a7233fc (assignment Day10)
+from agents import (
+    Agent, 
+    Runner, 
+    SQLiteSession, 
+    WebSearchTool, 
+    FileSearchTool,
+    ImageGenerationTool
+    )
 
-client = OpenAI()
 
-<<<<<<< HEAD
-user_account_ctx = UserAccountContext(
-    customer_id=1,
-    name="nico",
-    tier="basic",
-)
 
-=======
 client = OpenAI()
 
 VECTOR_STORE_ID = "vs_697e40198c28819197e07822c03fc07f"
+
+
+
+class FilteredSQLiteSession(SQLiteSession):
+    def __init__(self, session_id: str, database: str):
+        super().__init__(session_id, database)
+
+    def _remove_action_recursive(self, obj):
+        if isinstance(obj, dict):
+            cleaned = {k: v for k, v in obj.items() if k != "action"}
+            return {k: self._remove_action_recursive(v) for k, v in cleaned.items()}
+        elif isinstance(obj, list):
+            return [self._remove_action_recursive(item) for item in obj]
+        else:
+            return obj
+
+    async def get_items(self):
+        items = await super().get_items()
+        cleaned_items = [self._remove_action_recursive(copy.deepcopy(item)) for item in items]
+        return cleaned_items
+
+
 
 if "agent" not in st.session_state:
     st.session_state["agent"] = Agent(
@@ -41,23 +58,26 @@ if "agent" not in st.session_state:
             WebSearchTool(),
             FileSearchTool(
                 vector_store_ids=[VECTOR_STORE_ID],
-                max_num_results=3,
+                max_num_results=5,
+            ),
+            ImageGenerationTool(
+                tool_config={
+                    "type": "image_generation",
+                    "quality": "medium",
+                    "output_format": "jpeg",
+                    "partial_images": 1,
+                }
             ),
         ],
     )
+  
 agent = st.session_state["agent"]
->>>>>>> a7233fc (assignment Day10)
 
 if "session" not in st.session_state:
-    st.session_state["session"] = SQLiteSession(
-        "chat-history",
-        "customer-support-memory.db",
-    )
+    st.session_state["session"] = FilteredSQLiteSession(
+        "chat-history", "chat-gpt-clone-memory.db"
+)
 session = st.session_state["session"]
-
-if "agent" not in st.session_state:
-    st.session_state["agent"] = triage_agent
-
 
 async def paint_history():
     messages = await session.get_items()
@@ -65,32 +85,36 @@ async def paint_history():
         if "role" in message:
             with st.chat_message(message["role"]):
                 if message["role"] == "user":
-                    st.write(message["content"])
+                    content = message["content"]
+                    if isinstance(content, str):
+                        st.write(content)
+                    elif isinstance(content, list):
+                        for part in content:
+                            if "image_url" in part:
+                                st.image(part["image_url"])
+
                 else:
                     if message["type"] == "message":
-<<<<<<< HEAD
-                        st.write(message["content"][0]["text"].replace("$", "\$"))
-
-
-asyncio.run(paint_history())
-
-
-async def run_agent(message):
-
-    with st.chat_message("ai"):
-=======
-                        st.write(message["content"][0]["text"])
+                        st.write(message["content"][0]["text"].replace("$","\\$"))
+                        
         if "type" in message:
-            if message["type"] == "web_search_call":
+            message_type = message["type"]
+            if message_type == "web_search_call":
                 with st.chat_message("coach"):
                     st.write("🔍 Searched the web...")
-            elif message["type"] == "file_search_call":
+            elif message_type == "file_search_call":
                 with st.chat_message("coach"):
                     st.write("🗂️ Searched your files...")
+            elif message_type == "image_generation_call":
+                image = base64.b64decode(message["result"])
+                with st.chat_message("coach"):
+                    st.image(image)
 
 asyncio.run(paint_history())
 
+
 def update_status(status_container, event):
+
     status_messages = {
         "response.web_search_call.completed": ("✅ Web search completed.", "complete"),
         "response.web_search_call.in_progress": (
@@ -113,76 +137,64 @@ def update_status(status_container, event):
             "🗂️ File search in progress...",
             "running",
         ),
+        "response.image_generation_call.generating": (
+            "🎨 Drawing image...",
+            "running",
+        ),
+        "response.image_generation_call.in_progress": (
+            "🎨 Drawing image...",
+            "running",
+        ),
         "response.completed": (" ", "complete"),
     }
+
 
     if event in status_messages:
         label, state = status_messages[event]
         status_container.update(label=label, state=state)
 
+
+
 async def run_agent(message):
     with st.chat_message("coach"):
->>>>>>> a7233fc (assignment Day10)
+        status_container = st.status("⏳", expanded=False)
         text_placeholder = st.empty()
+        image_placeholder = st.empty()
         response = ""
 
-        st.session_state["text_placeholder"] = text_placeholder
+        stream = Runner.run_streamed(
+            agent,
+            message,
+            session=session,
+        )
 
-        try:
+        async for event in stream.stream_events():
+            if event.type == "raw_response_event":
 
-            stream = Runner.run_streamed(
-                st.session_state["agent"],
-                message,
-                session=session,
-                context=user_account_ctx,
-            )
+                update_status(status_container, event.data.type)
 
-            async for event in stream.stream_events():
-                if event.type == "raw_response_event":
+                if event.data.type == "response.output_text.delta":
+                    response += event.data.delta
+                    text_placeholder.write(response.replace("$", "\\$"))
 
-                    if event.data.type == "response.output_text.delta":
-                        response += event.data.delta
-                        text_placeholder.write(response.replace("$", "\$"))
+                elif event.data.type == "response.image_generation_call.partial_image":
+                    image = base64.b64decode(event.data.partial_image_b64)
+                    image_placeholder.image(image)
 
-                elif event.type == "agent_updated_stream_event":
+                elif event.data.type == "response.completed":
+                    image_placeholder.empty()
+                    text_placeholder.empty()
 
-                    if st.session_state["agent"].name != event.new_agent.name:
-                        
-                        st.write(f"🤖 Transfered from {st.session_state["agent"].name} to {event.new_agent.name}")
-
-                        st.session_state["agent"] = event.new_agent
-
-                        text_placeholder = st.empty()
-
-                        st.session_state["text_placeholder"] = text_placeholder
-                        response = ""
-
-        except InputGuardrailTripwireTriggered:
-            st.write("I can't help you with that.")
-
-
-<<<<<<< HEAD
-        except OutputGuardrailTripwireTriggered:
-            st.write("Cant show you that answer.")
-            st.session_state["text_placeholder"].empty()
-
-message = st.chat_input(
-    "Write a message for your assistant",
-)
-
-if message:
-
-    if message:
-        with st.chat_message("human"):
-            st.write(message)
-        asyncio.run(run_agent(message))
-
-=======
-prompt =st.chat_input(
+prompt = st.chat_input(
     "Write a message for your life coach",
     accept_file=True,
-    file_type=["txt"],
-    )
+    file_type=[
+        "txt",
+        "jpg",
+        "jpeg",
+        "png",
+    ],
+)
 
 if prompt:
 
@@ -200,14 +212,36 @@ if prompt:
                         file_id=uploaded_file.id,
                     )
                     status.update(label="✅ File uploaded", state="complete")
+        elif file.type.startswith("image/"):
+            with st.status("⏳ Uploading image...") as status:
+                file_bytes = file.getvalue()
+                base64_data = base64.b64encode(file_bytes).decode("utf-8")
+                data_uri = f"data:{file.type};base64,{base64_data}"
+                asyncio.run(
+                    session.add_items(
+                        [
+                            {
+                                "role": "user",
+                                "content": [
+                                    {
+                                        "type": "input_image",
+                                        "detail": "auto",
+                                        "image_url": data_uri,
+                                    }
+                                ],
+                            }
+                        ]
+                    )
+                )
+                status.update(label="✅ Image uploaded", state="complete")
+            with st.chat_message("human"):
+                st.image(data_uri)
 
     if prompt.text:
         with st.chat_message("human"):
             st.write(prompt.text)
         asyncio.run(run_agent(prompt.text))
 
-
->>>>>>> a7233fc (assignment Day10)
 
 with st.sidebar:
     reset = st.button("Reset memory")
