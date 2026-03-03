@@ -4,17 +4,25 @@ dotenv.load_dotenv()
 
 import asyncio
 import streamlit as st
-from agents import Agent, Runner, SQLiteSession, WebSearchTool
+from agents import Agent, Runner, SQLiteSession, WebSearchTool, function_tool
+
+
+#@function_tool
+#def get_advice() : 
+#    """Get advice from the agent"""
+#    return "You should be happy and grateful for what you have."
 
 if "agent" not in st.session_state:
     st.session_state["agent"] = Agent(
-        name="Assistant Agent",
+        name="Life Coach",
         instructions="""
-        You are a helpful assistant.
-
-        You have access to the following tools:
-            - Web Search Tool: Use this when the user asks a question that isn't in your training data. Use this to learn about current events.
+        You are a life coach.
+        You are helping the user to achieve their goals.
+        You are using the following tools:
+            - Web Search Tool: Use this when the user asks a question that isn't in your training data. It's atool for motivational content, self-improvement tips, and habit-building advice. Use this to learn about current events.
+            - Get Advice Tool: Use this when the user asks for advice.
         """,
+        #tools=[WebSearchTool(), get_advice],
         tools=[WebSearchTool()],
     )
 agent = st.session_state["agent"]
@@ -68,7 +76,7 @@ async def run_agent(message):
 
         async for event in stream.stream_events():
             if event.type == "raw_response_event":
-
+                
                 update_status(status_container, event.data.type)
 
                 if event.data.type == "response.output_text.delta":
@@ -76,7 +84,7 @@ async def run_agent(message):
                     text_placeholder.write(response)
 
 
-prompt =st.chat_input("Write a message for your assistant")
+prompt =st.chat_input("Write a message for your life coach")
 
 if prompt:
     with st.chat_message("human"):
