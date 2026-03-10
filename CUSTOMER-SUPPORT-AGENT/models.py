@@ -6,18 +6,27 @@ class UserAccountContext(BaseModel):
     name: str 
     tier: str = "basic" 
     email: str
+    reservation_code: str
+    contact_information: str
 
 class InputGuardRailOutput(BaseModel):
 
     is_off_topic: bool
     reason: str 
 
-class TechnicalOutputGuardRailOutput(BaseModel):
+class MenuOutputGuardRailOutput(BaseModel):
 
-    contains_off_topic: bool
-    contains_billing_data: bool
-    contains_order_data: bool
-    contains_account_data: bool
+    is_off_topic: bool
+    reason: str 
+
+class OrderOutputGuardRailOutput(BaseModel):
+
+    is_off_topic: bool
+    reason: str 
+
+class ReservationOutputGuardRailOutput(BaseModel):
+
+    is_off_topic: bool
     reason: str 
 
 class HandoffData(BaseModel):

@@ -1,6 +1,13 @@
 from agents import Agent, RunContextWrapper
 from models import UserAccountContext
-from tool import reset_user_password, enable_two_factor_auth, update_account_email, deactivate_account, export_account_data, AgentToolUsageLoggingHooks
+from tools import (
+    reset_user_password,
+    enable_two_factor_auth,
+    update_account_email,
+    deactivate_account,
+    export_account_data,
+    AgentToolUsageLoggingHooks,
+)
 
 
 def dynamic_account_agent_instructions(
@@ -53,6 +60,5 @@ account_agent = Agent(
         deactivate_account,
         export_account_data,
     ],
+    hooks=AgentToolUsageLoggingHooks(),
 )
-
-hooks = AgentToolUsageLoggingHooks()

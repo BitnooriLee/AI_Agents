@@ -4,31 +4,24 @@ dotenv.load_dotenv()
 from openai import OpenAI
 import asyncio
 import streamlit as st
-from agents import Runner, SQLiteSession, function_tool, RunContextWrapper, InputGuardrailTripwireTriggered, OutputGuardrailTripwireTriggered
-from agents.voice import AudioInput, VoicePipeline
-
+from agents import Runner, SQLiteSession, InputGuardrailTripwireTriggered
 from models import UserAccountContext
 from my_agents.triage_agent import triage_agent
-import numpy as np
-import wave
-import io
-from workflow import CustomWorkflow
-import sounddevice as sd 
-
-
-@function_tool
-def get_user_tier(wrapper: RunContextWrapper[UserAccountContext]):
-    return f"The user {wrapper.context.customer_id} has a {wrapper.context.tier} account."
-
+from my_agents.reservation_agent import reservation_agent
+from my_agents.menu_agent import menu_agent
+from my_agents.order_agent import order_agent
 
 client = OpenAI()
 
 user_account_ctx = UserAccountContext(
-    customer_id=123456,
-    name="John Doe",
+    customer_id=1,
+    name="nico",
     tier="basic",
-    email="john.doe@example.com",
+    email="nico@example.com",
+    reservation_code="ABC123",
+    contact_information="0123456789",
 )
+
 
 if "session" not in st.session_state:
     st.session_state["session"] = SQLiteSession(
@@ -40,49 +33,73 @@ session = st.session_state["session"]
 if "agent" not in st.session_state:
     st.session_state["agent"] = triage_agent
 
-def convert_audio(audio_input):
-    audio_data = audio_input.getvalue()
-    with wave.open(io.BytesIO(audio_data),"rb") as wav_file:
-        audio_frames = wav_file.readframes(-1)
-    return np.frombuffer(audio_frames, dtype=np.int16)
+
+async def paint_history():
+    messages = await session.get_items()
+    for message in messages:
+        if "role" in message:
+            with st.chat_message(message["role"]):
+                if message["role"] == "user":
+                    st.write(message["content"])
+                else:
+                    if message["type"] == "message":
+                        st.write(message["content"][0]["text"].replace("$", "\$"))
 
 
-async def run_agent(audio_input):
+asyncio.run(paint_history())
+
+
+async def run_agent(message):
 
     with st.chat_message("ai"):
-        status_container = st.status("Processing voice message...")
+        text_placeholder = st.empty()
+        response = ""
+
+        st.session_state["text_placeholder"] = text_placeholder
 
         try:
-            audio_array = convert_audio(audio_input)
-            audio = AudioInput(buffer=audio_array) 
 
-            workflow = CustomWorkflow(context=user_account_ctx)
-            pipeline = VoicePipeline(workflow=workflow)
-            status_container.update(label="Running workflow", state="running")
-            result = await pipeline.run(audio)
-            player = sd.OutputStream(samplerate=24000, channels=1, dtype=np.int16)
-            player.start()
-            status_container.update(state="complete")
+            stream = Runner.run_streamed(
+                st.session_state["agent"],
+                message,
+                session=session,
+                context=user_account_ctx,
+            )
 
-            async for event in result.strem():
-                if event.type == "voice_stream_event_audio":
-                    player.write(event.data)
+            async for event in stream.stream_events():
+                if event.type == "raw_response_event":
+
+                    if event.data.type == "response.output_text.delta":
+                        response += event.data.delta
+                        text_placeholder.write(response.replace("$", "\$"))
+
+                elif event.type == "agent_updated_stream_event":
+
+                    if st.session_state["agent"].name != event.new_agent.name:
+                        
+                        st.write(f"🤖 Transfered from {st.session_state["agent"].name} to {event.new_agent.name}")
+
+                        st.session_state["agent"] = event.new_agent
+
+                        text_placeholder = st.empty()
+
+                        st.session_state["text_placeholder"] = text_placeholder
+                        response = ""
 
         except InputGuardrailTripwireTriggered:
-            st.write("I cannot help with that. Please try again.")
-        
-        except OutputGuardrailTripwireTriggered:
-            st.write("I cannot help with that. Please try again.")
+            st.write("I can't help you with that.")
 
-audio_input = st.audio_input(
-    "Record your message for your assistant",
+
+message = st.chat_input(
+    "Write a message for your assistant",
 )
 
+if message:
 
-if audio_input:
-    with st.chat_message("human"):
-        st.audio(audio_input)
-    asyncio.run(run_agent(audio_input))
+    if message:
+        with st.chat_message("human"):
+            st.write(message)
+        asyncio.run(run_agent(message))
 
 
 with st.sidebar:
