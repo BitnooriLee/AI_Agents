@@ -103,6 +103,27 @@ def lookup_order_status(context: UserAccountContext, order_number: str) -> str:
 
 
 # =============================================================================
+# COMPLAINT SUPPORT TOOLS
+# =============================================================================
+
+@function_tool
+def complaint_support(context: UserAccountContext, complaint: str) -> str:
+    """
+    Support for customer complaints.
+
+    Args:
+        complaint: Complaint from customer, complaint about the restaurant, food, service, staff, price, quality, quantity, delivery, cleaning, noise, parking, etc.
+    """
+    return f"""
+    🔍 Complaint support for {complaint}:\n
+    🔍 Complaint support: {random.choice(["Resolved", "Pending", "In progress"])}
+    🔍 Offer solutions: {random.choice(["Refunds", "Discounts", "Manager calls back"])}
+    🔍 Appropriately escalate serious issues: {random.choice(["Escalated to manager", "Escalated to CEO", "Escalated to police"])}
+    """.strip()
+
+
+
+# =============================================================================
 # ACCOUNT MANAGEMENT TOOLS
 # =============================================================================
 

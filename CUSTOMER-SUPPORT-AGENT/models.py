@@ -1,5 +1,5 @@
-from re import S
 from pydantic import BaseModel
+from typing import Optional
 
 class UserAccountContext(BaseModel):
     customer_id: int
@@ -14,17 +14,7 @@ class InputGuardRailOutput(BaseModel):
     is_off_topic: bool
     reason: str 
 
-class MenuOutputGuardRailOutput(BaseModel):
-
-    is_off_topic: bool
-    reason: str 
-
-class OrderOutputGuardRailOutput(BaseModel):
-
-    is_off_topic: bool
-    reason: str 
-
-class ReservationOutputGuardRailOutput(BaseModel):
+class OutputGuardRailOutput(BaseModel):
 
     is_off_topic: bool
     reason: str 

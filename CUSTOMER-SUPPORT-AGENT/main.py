@@ -4,12 +4,16 @@ dotenv.load_dotenv()
 from openai import OpenAI
 import asyncio
 import streamlit as st
-from agents import Runner, SQLiteSession, InputGuardrailTripwireTriggered
+from agents import (
+    Runner,
+    SQLiteSession,
+    InputGuardrailTripwireTriggered,
+    OutputGuardrailTripwireTriggered,
+)
 from models import UserAccountContext
 from my_agents.triage_agent import triage_agent
-from my_agents.reservation_agent import reservation_agent
-from my_agents.menu_agent import menu_agent
-from my_agents.order_agent import order_agent
+
+
 
 client = OpenAI()
 
@@ -20,6 +24,7 @@ user_account_ctx = UserAccountContext(
     email="nico@example.com",
     reservation_code="ABC123",
     contact_information="0123456789",
+    
 )
 
 
@@ -88,6 +93,11 @@ async def run_agent(message):
 
         except InputGuardrailTripwireTriggered:
             st.write("I can't help you with that.")
+
+
+        except OutputGuardrailTripwireTriggered:
+            st.write("Cant show you that answer.")
+            st.session_state["text_placeholder"].empty()
 
 
 message = st.chat_input(
