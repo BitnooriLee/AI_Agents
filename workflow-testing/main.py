@@ -3,6 +3,8 @@ from typing_extensions import TypedDict
 from langgraph.graph import StateGraph, START, END
 from langgraph.checkpoint.memory import MemorySaver
 
+checkpointer = MemorySaver()
+
 class EmailState(TypedDict):
     category: Literal["spam", "normal", "urgent"]
     priority_score: int 
@@ -54,8 +56,5 @@ graph_builder.add_edge("categorize_email", "assign_priority")
 graph_builder.add_edge("assign_priority", "draft_response")
 graph_builder.add_edge("draft_response", END)
 
-graph = graph_builder.compile()
+graph = graph_builder.compile(checkpointer=checkpointer)
 
-result = graph.invoke({"email": "Hello, I need help with my account. It's urgent."})
-
-print(result)
